@@ -2,20 +2,28 @@
 
 :root {
     --gradient: radial-gradient(circle,
-        #C6FFDD,
-        #FBD786,
-        #f7797d
+        #ee9ca7,
+        #ffdde1
     );
 }
+
+.logo{ 
+    position:fixed; 
+    padding: 20px;
+    top:0; 
+    left:0; 
+} 
 
 * {
     font-family: 'Fira Sans Condensed', sans-serif;
 }
 
 body {
+    color: #212121;
     background-image: var(--gradient);
     background-size: 300%;
     animation: bg-animation 60s infinite alternate;
+    padding: 10px;
 }
 
 @keyframes bg-animation {
