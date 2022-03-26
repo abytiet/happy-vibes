@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed&display=swap');
+
+:root {
+    --gradient: radial-gradient(circle,
+        #ee9ca7,
+        #ffdde1
+    );
+}
+
+.logo{ 
+    position:fixed; 
+    padding: 20px;
+    top:0; 
+    left:0; 
+} 
+
+* {
+    font-family: 'Fira Sans Condensed', sans-serif;
+}
+
+body {
+    color: #212121;
+    background-image: var(--gradient);
+    background-size: 300%;
+    animation: bg-animation 60s infinite alternate;
+    padding: 10px;
+}
+
+@keyframes bg-animation {
+    0% {background-position: left}
+    100% {background-position: right}
+}
+
+.content {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn {
+    border: 0;
+    padding: 0.5em 1.5em;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+    background-color: white;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+.affy {
+    position: fixed; 
+    bottom: 0px; 
+    right: 0px;
+}
