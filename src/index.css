@@ -47,10 +47,15 @@ body {
     font-size: 1rem;
     transition: transform 0.3s ease;
     background-color: white;
+    color: #212121;
 }
 
 .btn:hover {
     transform: translateY(-3px);
+}
+
+.paper {
+    z-index: 0;
 }
 
 .affy {
