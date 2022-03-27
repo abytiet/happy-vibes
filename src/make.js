@@ -10,7 +10,6 @@ var img = new Image();
  * @param {*} text Text to add to image
  */
 function addTextToImage() {
-    context.clearRect(0, 0, canvas.width, canvas.height);
     var fontsize = 100;
     var width = canvas.width
 
@@ -23,7 +22,7 @@ function addTextToImage() {
     // Draw Image function
     img = new Image();
     img.src = image_url;
-    img.onload = function () {
+    img.onload = function () {  
         context.drawImage(img, 0, 0);
         context.fillStyle = "white";
         context.textAlign = "center"; 
@@ -32,26 +31,68 @@ function addTextToImage() {
         context.lineWidth = 2;
         context.strokeText(caption, width/2, fontsize);
     };
-}
-
+    
 /**
  * On-click event for Update button
  * Updates the canvas based on provided caption / image URL
  */
 document.getElementById('updatebtn').addEventListener('click', function() {
-    console.log("clicked");
-    console.log(document.getElementById("ImageURL").value + "img")
-    console.log(document.getElementById("Caption").value + "caption")
-    document.getElementById("Caption").value
-    if (document.getElementById("ImageURL").value != null) {
-        console.log(img.src);
-        img.src = document.getElementById("ImageURL").value;
-        image_url = document.getElementById("ImageURL").value;
-    } 
-    if (document.getElementById("Caption").value) {
-        caption = document.getElementById("Caption").value;
+    let data;
+    if (document.getElementById("ImageURL").value != null && document.getElementById("ImageURL").value.length != 0) {
+        updateImage(document.getElementById("ImageURL").value);
+        // post image url to database
+        data = {url: document.getElementById("ImageURL").value};
+        fetch("https://affi-happy-vibes.herokuapp.com/pictures", {
+            method: "POST",
+            headers: {'Content-Type': 'application/json'}, 
+            body: JSON.stringify(data)
+        }).then(res => {
+        console.log("Request complete! response:", res);
+    });
     }
-    addTextToImage();
+    if (document.getElementById("Caption").value && document.getElementById("Caption").value.length != 0) {
+        updateCaption(document.getElementById("Caption").value);
+        postCaption();
+    }  
   });
+}
 
-  
+
+
+async function getRandomImage() {
+    fetch('https://affi-happy-vibes.herokuapp.com/pictures/random')
+    .then(response => response.json())
+    .then(data => updateImage(data[0].url))
+  }
+
+function updateImage(url) {
+    console.log(url);
+    img.src = url;
+    image_url = url;
+
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    addTextToImage();
+}
+
+function getRandomCaption() {
+    fetch('https://affi-happy-vibes.herokuapp.com/captions/random')
+    .then(response => response.json())
+    .then(data => updateCaption(data[0].text))
+}
+
+function updateCaption(text) {
+    caption = text;
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    addTextToImage();
+}
+
+function postCaption() {
+    data = {text: document.getElementById("Caption").value};
+    fetch("https://affi-happy-vibes.herokuapp.com/captions", {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'}, 
+        body: JSON.stringify(data)
+    }).then(res => {
+    console.log("Request complete! response:", res);
+    });
+}

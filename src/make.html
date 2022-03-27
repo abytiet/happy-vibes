@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta name="description" content="GirlHacks 2022 Project">
-    <title>AFFY: HAPPY VIBES</title>
+    <title>affi: HAPPY VIBES</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.gif">
     <link rel="stylesheet" href="index.css">
 </head>
@@ -14,7 +14,7 @@
         </a>
     </div>
     <div class="content">
-        <h1>Create an Image</h1>
+        <h1>Spread Positivity</h1>
         <div class="paper">
             <br>
             <canvas id="canvas" width="400" height="400"></canvas>
@@ -22,18 +22,23 @@
         </div>
         <center>
             <br>
-            <label for="Caption"> Caption </label><br>
-            <input type="text" id="Caption" name="Caption" placeholder="Caption">
-            <label for="ImageURL"> Image URL </label><br>
+            <p><b>Update Image using Custom Fields</b></p>
+            <label for="Caption">Caption </label>
+            <input type="text" id="Caption" name="Caption" placeholder="Caption" maxlength="25">
+            <br></br>
+            <label for="ImageURL">Image URL</label>
             <input type="text" id="ImageURL" name="ImageURL" placeholder="Image URL">
-            <button class="btn" id=updatebtn> Update </button>
+            <br></br>
+            <button class="btn" id=updatebtn> Update Custom</button>
+            <br></br>
+            <button class="btn" id="RandomCaption" onclick="getRandomCaption()">Random Caption</button>
+            <button class="btn" id="RandomImage" onclick="getRandomImage()">Random Image</button>
             <br>
         </center>
         <br><br><br><br><br>
-        <button class="btn" onclick="window.location.href='results.html'">Create</button>
     </div>
-    <div class="affy">
-        <img src="../images/affi.png" alt="affy girl">
+    <div class="affi">
+        <img src="../images/affi.png" alt="affi girl">
     </div>
     <script src="make.js"></script>
 </body>
