@@ -1,7 +1,7 @@
 var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
-var image_url = "http://www.gravatar.com/avatar/0c7c99dec43bb0062494520e57f0b9ae?s=256&d=identicon&r=PG";
-var caption = "Your text";
+var image_url = "https://i.pinimg.com/originals/4c/bc/43/4cbc4377ef4095828bf7374f04074c57.jpg";
+var caption = "I Love You";
 var img = new Image();
 
 /**
@@ -44,7 +44,9 @@ document.getElementById('updatebtn').addEventListener('click', function() {
     console.log(document.getElementById("Caption").value + "caption")
     document.getElementById("Caption").value
     if (document.getElementById("ImageURL").value != null) {
+        console.log(img.src);
         img.src = document.getElementById("ImageURL").value;
+        image_url = document.getElementById("ImageURL").value;
     } 
     if (document.getElementById("Caption").value) {
         caption = document.getElementById("Caption").value;
