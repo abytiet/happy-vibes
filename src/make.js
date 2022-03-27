@@ -30,35 +30,44 @@ function addTextToImage() {
         context.strokeStyle = "black";
         context.lineWidth = 2;
         context.strokeText(caption, width/2, fontsize);
-    };
-}
-
-/**
+    };/**
  * On-click event for Update button
  * Updates the canvas based on provided caption / image URL
  */
 document.getElementById('updatebtn').addEventListener('click', function() {
-    if (document.getElementById("ImageURL").value == null || document.getElementById("ImageURL").value.length == 0) {
-        pass;
-    } else {
-        img.src = document.getElementById("ImageURL").value;
-        image_url = document.getElementById("ImageURL").value;
+    if (document.getElementById("ImageURL").value != null && document.getElementById("ImageURL").value.length != 0) {
+        updateImage(document.getElementById("ImageURL").value);
+    } 
+    if (document.getElementById("Caption").value && document.getElementById("Caption").value.length != 0) {
+        updateCaption(document.getElementById("Caption").value);
     }
-    if (document.getElementById("Caption").value || document.getElementById("Caption").value.length != 0) {
-        pass;
-    } else {
-        caption = document.getElementById("Caption").value;
-        context.clearRect(0, 0, canvas.width, canvas.height);
-    }
+  });
+}
+
+    async function getRandomImage() {
+    fetch('https://affi-happy-vibes.herokuapp.com/pictures/random')
+    .then(response => response.json())
+    .then(data => updateImage(data[0].url))
+  }
+
+function updateImage(url) {
+    console.log(url);
+    img.src = url;
+    image_url = url;
+
     context.clearRect(0, 0, canvas.width, canvas.height);
     addTextToImage();
-  });
+}
 
 
-  function getRandomImage() {
-      console.log("");
-  }
+function getRandomCaption() {
+    fetch('https://affi-happy-vibes.herokuapp.com/captions/random')
+    .then(response => response.json())
+    .then(data => updateCaption(data[0].text))
+}
 
-  function getRandomCaption() {
-      console.log("");
-  }
+function updateCaption(text) {
+    caption = text;
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    addTextToImage();
+}
