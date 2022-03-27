@@ -30,21 +30,36 @@ function addTextToImage() {
         context.strokeStyle = "black";
         context.lineWidth = 2;
         context.strokeText(caption, width/2, fontsize);
-    };/**
+    };
+    
+/**
  * On-click event for Update button
  * Updates the canvas based on provided caption / image URL
  */
 document.getElementById('updatebtn').addEventListener('click', function() {
+    let data;
     if (document.getElementById("ImageURL").value != null && document.getElementById("ImageURL").value.length != 0) {
         updateImage(document.getElementById("ImageURL").value);
-    } 
+        // post image url to database
+        data = {url: document.getElementById("ImageURL").value};
+        fetch("https://affi-happy-vibes.herokuapp.com/pictures", {
+            method: "POST",
+            headers: {'Content-Type': 'application/json'}, 
+            body: JSON.stringify(data)
+        }).then(res => {
+        console.log("Request complete! response:", res);
+    });
+    }
     if (document.getElementById("Caption").value && document.getElementById("Caption").value.length != 0) {
         updateCaption(document.getElementById("Caption").value);
-    }
+        postCaption();
+    }  
   });
 }
 
-    async function getRandomImage() {
+
+
+async function getRandomImage() {
     fetch('https://affi-happy-vibes.herokuapp.com/pictures/random')
     .then(response => response.json())
     .then(data => updateImage(data[0].url))
@@ -59,7 +74,6 @@ function updateImage(url) {
     addTextToImage();
 }
 
-
 function getRandomCaption() {
     fetch('https://affi-happy-vibes.herokuapp.com/captions/random')
     .then(response => response.json())
@@ -70,4 +84,15 @@ function updateCaption(text) {
     caption = text;
     context.clearRect(0, 0, canvas.width, canvas.height);
     addTextToImage();
+}
+
+function postCaption() {
+    data = {text: document.getElementById("Caption").value};
+    fetch("https://affi-happy-vibes.herokuapp.com/captions", {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'}, 
+        body: JSON.stringify(data)
+    }).then(res => {
+    console.log("Request complete! response:", res);
+    });
 }
