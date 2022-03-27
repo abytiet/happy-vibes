@@ -1,8 +1,8 @@
-var canvas = document.getElementById("canvas");
-var context = canvas.getContext("2d");
-var image_url = "https://i.pinimg.com/originals/4c/bc/43/4cbc4377ef4095828bf7374f04074c57.jpg";
-var caption = "I Love You";
-var img = new Image();
+let canvas = document.getElementById("canvas");
+let context = canvas.getContext("2d");
+let image_url = getRandomImage();
+let caption = getRandomCaption();
+let img = new Image();
 
 /**
  * Add provided text to given image
@@ -10,8 +10,8 @@ var img = new Image();
  * @param {*} text Text to add to image
  */
 function addTextToImage() {
-    var fontsize = 100;
-    var width = canvas.width
+    let fontsize = 100;
+    let width = canvas.width
 
     // Lower the font size until the text fits the canvas
     do {
@@ -22,14 +22,17 @@ function addTextToImage() {
     // Draw Image function
     img = new Image();
     img.src = image_url;
-    img.onload = function () {  
-        context.drawImage(img, 0, 0);
-        context.fillStyle = "white";
-        context.textAlign = "center"; 
-        context.fillText(caption, width/2, fontsize);
-        context.strokeStyle = "black";
+    context.fillStyle = "#000";
+    context.fillRect(0,0,canvas.width,canvas.height);
+    img.onload = function () { 
         context.lineWidth = 2;
-        context.strokeText(caption, width/2, fontsize);
+        context.drawImage(img, (canvas.width / 2) - (img.width / 2), 0, img.width, canvas.height);
+        
+        context.strokeStyle = "black";
+        context.fillStyle = "white";
+        context.strokeText(caption, canvas.width / 2, fontsize);
+        context.fillText(caption, canvas.width / 2, fontsize);
+        context.textAlign = "center"; 
     };
     
 /**
@@ -58,7 +61,6 @@ document.getElementById('updatebtn').addEventListener('click', function() {
 }
 
 
-
 async function getRandomImage() {
     fetch('https://affi-happy-vibes.herokuapp.com/pictures/random')
     .then(response => response.json())
@@ -66,7 +68,6 @@ async function getRandomImage() {
   }
 
 function updateImage(url) {
-    console.log(url);
     img.src = url;
     image_url = url;
 
