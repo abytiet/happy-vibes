@@ -14,7 +14,7 @@
         </a>
     </div>
     <div class="content">
-        <h1>Create an Image</h1>
+        <h1>Spread Positivity</h1>
         <div class="paper">
             <br>
             <canvas id="canvas" width="400" height="400"></canvas>
@@ -26,7 +26,11 @@
             <input type="text" id="Caption" name="Caption" placeholder="Caption" maxlength="25">
             <label for="ImageURL"> Image URL </label><br>
             <input type="text" id="ImageURL" name="ImageURL" placeholder="Image URL">
-            <button class="btn" id=updatebtn> Update </button>
+            <p>Update Image using Custom Fields</p>
+            <button class="btn" id=updatebtn> Update Custom</button>
+            <br></br>
+            <button class="btn" id="RandomCaption" onclick="getRandomCaption()">Random Caption</button>
+            <button class="btn" id="RandomImage" onclick="getRandomImage()">Random Image</button>
             <br>
         </center>
         <br><br><br><br><br>

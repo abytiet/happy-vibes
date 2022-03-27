@@ -10,7 +10,6 @@ var img = new Image();
  * @param {*} text Text to add to image
  */
 function addTextToImage() {
-    context.clearRect(0, 0, canvas.width, canvas.height);
     var fontsize = 100;
     var width = canvas.width
 
@@ -22,7 +21,7 @@ function addTextToImage() {
 
     // Draw Image function
     img = new Image();
-    img.src = image_url + '?' + new Date().getTime();
+    img.src = image_url;
     img.onload = function () {  
         context.drawImage(img, 0, 0);
         context.fillStyle = "white";
@@ -39,17 +38,27 @@ function addTextToImage() {
  * Updates the canvas based on provided caption / image URL
  */
 document.getElementById('updatebtn').addEventListener('click', function() {
-    console.log("clicked");
-    console.log(document.getElementById("ImageURL").value + "img")
-    console.log(document.getElementById("Caption").value + "caption")
-    document.getElementById("Caption").value
-    if (document.getElementById("ImageURL").value != null) {
-        console.log(img.src);
-        img.src = document.getElementById("ImageURL").value + '?' + new Date().getTime();
+    if (document.getElementById("ImageURL").value == null || document.getElementById("ImageURL").value.length == 0) {
+        pass;
+    } else {
+        img.src = document.getElementById("ImageURL").value;
         image_url = document.getElementById("ImageURL").value;
-    } 
-    if (document.getElementById("Caption").value) {
-        caption = document.getElementById("Caption").value;
     }
+    if (document.getElementById("Caption").value || document.getElementById("Caption").value.length != 0) {
+        pass;
+    } else {
+        caption = document.getElementById("Caption").value;
+        context.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    context.clearRect(0, 0, canvas.width, canvas.height);
     addTextToImage();
   });
+
+
+  function getRandomImage() {
+      console.log("");
+  }
+
+  function getRandomCaption() {
+      console.log("");
+  }
