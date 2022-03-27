@@ -28,6 +28,10 @@
 // routes
 app.use('/pictures', pictureRoute);
 app.use('/captions', captionRoute);
+
+app.get('/', (req, res) => {
+    return res.send('happy-vibes content server');
+});
  
  const server = app.listen(PORT, function () {
      const port = server.address().port;
