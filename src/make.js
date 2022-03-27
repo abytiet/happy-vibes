@@ -22,8 +22,8 @@ function addTextToImage() {
 
     // Draw Image function
     img = new Image();
-    img.src = image_url;
-    img.onload = function () {
+    img.src = image_url + '?' + new Date().getTime();
+    img.onload = function () {  
         context.drawImage(img, 0, 0);
         context.fillStyle = "white";
         context.textAlign = "center"; 
@@ -45,7 +45,7 @@ document.getElementById('updatebtn').addEventListener('click', function() {
     document.getElementById("Caption").value
     if (document.getElementById("ImageURL").value != null) {
         console.log(img.src);
-        img.src = document.getElementById("ImageURL").value;
+        img.src = document.getElementById("ImageURL").value + '?' + new Date().getTime();
         image_url = document.getElementById("ImageURL").value;
     } 
     if (document.getElementById("Caption").value) {
@@ -53,5 +53,3 @@ document.getElementById('updatebtn').addEventListener('click', function() {
     }
     addTextToImage();
   });
-
-  
