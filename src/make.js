@@ -1,11 +1,16 @@
+var canvas = document.getElementById("canvas");
+var context = canvas.getContext("2d");
+var image_url = "https://i.pinimg.com/originals/4c/bc/43/4cbc4377ef4095828bf7374f04074c57.jpg";
+var caption = "I Love You";
+var img = new Image();
+
 /**
  * Add provided text to given image
  * @param {*} imagePath Image Path
  * @param {*} text Text to add to image
  */
-function addTextToImage(imagePath, text) {
-    var canvas = document.getElementById("canvas");
-    var context = canvas.getContext("2d");
+function addTextToImage() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
     var fontsize = 100;
     var width = canvas.width
 
@@ -13,20 +18,40 @@ function addTextToImage(imagePath, text) {
     do {
         fontsize--;
         context.font = fontsize + "px " + "arial";
-    } while (context.measureText(text).width > canvas.width)
+    } while (context.measureText(caption).width > canvas.width)
 
     // Draw Image function
-    var img = new Image();
-    img.src = imagePath;
+    img = new Image();
+    img.src = image_url;
     img.onload = function () {
         context.drawImage(img, 0, 0);
         context.fillStyle = "white";
         context.textAlign = "center"; 
-        context.fillText(text, width/2, fontsize);
+        context.fillText(caption, width/2, fontsize);
         context.strokeStyle = "black";
         context.lineWidth = 2;
-        context.strokeText(text, width/2, fontsize);
+        context.strokeText(caption, width/2, fontsize);
     };
 }
 
-addTextToImage("https://i.pinimg.com/originals/4c/bc/43/4cbc4377ef4095828bf7374f04074c57.jpg", "damm");
+/**
+ * On-click event for Update button
+ * Updates the canvas based on provided caption / image URL
+ */
+document.getElementById('updatebtn').addEventListener('click', function() {
+    console.log("clicked");
+    console.log(document.getElementById("ImageURL").value + "img")
+    console.log(document.getElementById("Caption").value + "caption")
+    document.getElementById("Caption").value
+    if (document.getElementById("ImageURL").value != null) {
+        console.log(img.src);
+        img.src = document.getElementById("ImageURL").value;
+        image_url = document.getElementById("ImageURL").value;
+    } 
+    if (document.getElementById("Caption").value) {
+        caption = document.getElementById("Caption").value;
+    }
+    addTextToImage();
+  });
+
+  

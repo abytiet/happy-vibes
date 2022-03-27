@@ -9,7 +9,8 @@
 
 .logo{ 
     position:fixed; 
-    padding: 20px;
+    padding-left: 10px;
+    padding-top: 10px;
     top:0; 
     left:0; 
 } 
@@ -55,8 +56,33 @@ body {
 }
 
 .paper {
-    z-index: 0;
+    background-image: url("../images/paper-bg.png");
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    padding: 3%;
 }
+
+
+input[type=file]::file-selector-button {
+    display: block;
+    padding: 0.5em 1.5em;
+    font-family: 'Fira Sans Condensed', sans-serif;
+    border-radius: 10px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #212121;
+    cursor: pointer;
+    transition: transform .2s ease-out;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  }
 
 .affy {
     position: fixed; 
